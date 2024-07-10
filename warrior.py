@@ -52,7 +52,8 @@ class player:
         self.weapon['level']=1
         self.weapon['cost']=1000
         self.armour=dict(level=1,hp=300,max_hp=300,cost=1000)
-        self.upgrade_list=[0,0,500,750,850,900,1000,1100,1200,1300,1400]
+        self.upgrade_list=[0,0,500,750,850,900,950,1000,1050,1100,1200]
+        
         self.potions=[]
     def dodge(self):
         return chance()<(((self.luck+1)/2)*0.016)
@@ -78,7 +79,8 @@ class player:
             if hp>=self.armour['hp']:
                 self.armour['hp']=((self.armour['max_hp']*per)//100)
                 break
-    def mend_armour(self)
+    def mend_armour(self):
+        pass
 class enemy:
     def __init__(self,name,hp,deffence,attack,gold,xp):
         self.name=name
