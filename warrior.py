@@ -88,6 +88,8 @@ class player:
         if dmg<=0:
             print(f"Damage taken by {self.name.capitalize()} : 0")
             return 0
+        else:
+            print(f"Damage deffended: {dmg}")
         arm=dmg//10
         if self.armour['hp']>=arm:
             print(f"Damage absorbed by armour : {arm}")
@@ -163,7 +165,20 @@ class enemy:
         print(f"Attack strength : {attack}\nSpecial attack strength : {sp_attack}\n{crit}Total strength : {total}")
         return total
     def take_dmg(self,dmg):
-        pass
+        if self.dodge():
+            print("Attack dodged !")
+            return False
+        deffence=randint(((self.deffence*35)//100),self.deffence)
+        print(f"Damage deffended : {deffence}")
+        sp_deffence=randint(((self.sp_deffence*50)//100),self.sp_deffence)
+        print(f"Special deffence : {sp_deffence}")
+        dmg-=(deffence+sp_deffence)
+        if dmg<=0:
+            print(f"Damage caused to {self.name.capitalize()} : 0")
+            return            
+        print(f"Damage caused to {self.name.capitalize()} : {dmg}")
+        self.hp-=dmg
+        return True
 def shop(player):
     while True:
         store=input("Press :\n(a) for Armoury\n(p) for Potions\n(i) for Items\n(e) for Exit-Shop\n-->").lower()
@@ -176,4 +191,5 @@ player=player(idol['name'],idol['hp'],idol['deffence'],idol['attack'],idol['clas
 while player.alive():
     beast=choice(enemies)
     beast=enemy(beast['name'],randint(*beast['hp']),randint(*beast['deffence']),randint(*beast['attack']),randint(*beast['sp_deffence']),randint(*beast['sp_attack']),player.luckify(beast['gold']),player.luckify(beast['xp']))
-    break
+    while beast.alive():
+        pass
