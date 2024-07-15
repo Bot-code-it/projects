@@ -181,7 +181,10 @@ class enemy:
         self.hp-=dmg
         return True
 def Armoury(player):
-    pass
+    clear()
+    armour=player.armour
+    print("__"*6,'Armory','__'*6)
+    pritn(f"Health: {armour['health']}")
 def Shop(player):
     while True:
         if store:=input("(e) to Exit-Shop\n-->")=='e':
